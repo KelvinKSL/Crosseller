@@ -12,31 +12,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    private String phoneNumber;
-    private String password;
     private String fullName;
+    private String password;
+    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
-
-    @OneToMany(mappedBy = "seller")
-    @JsonIgnore
-    private List<Product> products = new ArrayList<>();
-
-    public void addProduct(Product product) {
-        product.setSeller(this);
-        products.add(product);
-    }
+    private Role role; // BUYER, SELLER, BOTH
 }
+
 
 

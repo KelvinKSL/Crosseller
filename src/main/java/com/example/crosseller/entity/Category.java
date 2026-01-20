@@ -12,24 +12,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-    @OneToMany(mappedBy = "category")
-    @JsonIgnore
-    private List<Product> products = new ArrayList<>();
-
-    public void addProduct(Product product) {
-        products.add(product);
-        product.setCategory(this);
-    }
-
-
-
+    private boolean isActive;
+    @ManyToOne
+    private Category category;
 }

@@ -7,12 +7,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class OrderItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private double price;
+    private int quantity;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
@@ -20,8 +23,5 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
-    private Double price;
-    private Integer quantity;
-
 }
+
